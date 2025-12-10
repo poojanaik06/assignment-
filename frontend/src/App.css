@@ -306,3 +306,300 @@ textarea {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+/* Keep your existing root variables and body styles... */
+/* Add/Replace these sections: */
+
+/* --- EDITOR SPECIFIC --- */
+.centered-view {
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-header {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand-logo-large {
+  font-weight: 700; 
+  font-size: 1.5rem; 
+  letter-spacing: 1px;
+}
+
+.loading-overlay {
+  position: absolute;
+  bottom: 120px;
+  background: rgba(19, 19, 20, 0.9);
+  padding: 20px 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  animation: fadeIn 0.5s ease;
+}
+
+/* --- BLOG PAGE VIEW (THE NEW PART) --- */
+.blog-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Allow scrolling for long blogs */
+}
+
+.blog-nav {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 40px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: color 0.2s;
+}
+
+.nav-btn:hover {
+  color: var(--accent-color);
+}
+
+/* The Article Paper */
+.blog-article {
+  width: 100%;
+  max-width: 800px; /* Optimal reading width */
+  padding: 0 20px 60px 20px;
+  font-family: 'Merriweather', serif; /* Serif for reading */
+  color: #e3e3e3;
+  line-height: 1.9;
+  font-size: 1.1rem;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Typography for the Blog */
+.blog-article h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blog-article h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.blog-article p {
+  margin-bottom: 1.5rem;
+  color: #c4c7c5;
+}
+
+.blog-footer {
+  margin-top: auto;
+  padding: 40px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+/* --- Keep the previous root/body styles --- */
+/* Add/Replace these sections for the Chat & Blog Cards */
+
+/* --- Chat Feed Layout --- */
+.chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0 120px 0; /* Huge bottom padding for input */
+  width: 100%;
+  max-width: 900px; /* Slightly wider to fit the blog card */
+  margin: 0 auto;
+}
+
+.message-wrapper {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+/* --- User Message Styling --- */
+.message-wrapper.user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 70%;
+}
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+}
+
+.msg-text {
+  background: #28292a;
+  padding: 12px 18px;
+  border-radius: 20px 4px 20px 20px;
+  color: var(--text-main);
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* --- AI Message Group --- */
+.ai-message-group {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.ai-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* --- THE BLOG CARD (Preview) --- */
+.blog-card {
+  flex: 1;
+  background: #1e1f20; /* Card background */
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  max-width: 100%;
+}
+
+.blog-card-header {
+  background: rgba(255,255,255,0.03);
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: var(--accent-color);
+  background: rgba(110, 180, 135, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* The actual blog text inside the card */
+.blog-content {
+  padding: 40px;
+  background: #ffffff; /* Make the paper White for contrast */
+  color: #1a1a1a; /* Dark text for readability */
+  font-family: 'Merriweather', serif; /* Editorial Font */
+  line-height: 1.8;
+}
+
+/* Typography override for inside the white card */
+.blog-content h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #1b3544;
+  font-size: 2.2rem;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.blog-content h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #2c5d45; /* Darker green for white paper */
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.blog-content p {
+  margin-bottom: 1.2rem;
+  color: #333;
+}
+
+/* Card Footer Actions */
+.blog-card-footer {
+  background: #1e1f20;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.card-action {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.card-action:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.card-action.primary {
+  background: var(--brand-gradient);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Loading State */
+.loading-bubble {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
