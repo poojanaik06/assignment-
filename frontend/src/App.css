@@ -1,42 +1,308 @@
-#root {
-  max-width: 1280px;
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  /* Gemini Dark Mode Base Colors */
+  --bg-body: #131314;       /* The official Google Dark Grey */
+  --bg-sidebar: #1e1f20;    /* Slightly lighter for sidebar */
+  --bg-surface: #28292a;    /* Input bars and cards */
+  --bg-user-bubble: #2d2e2f;
+  
+  /* Text */
+  --text-main: #e3e3e3;
+  --text-secondary: #a4a4a4;
+  
+  /* Your Custom Brand Gradient */
+  --brand-gradient: linear-gradient(90.8deg, rgba(27,53,68,1) 2.2%, rgba(110,180,135,1) 84%);
+  --accent-color: #6EB487;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif; /* Clean, modern font like Google Sans */
+  height: 100vh;
+  overflow: hidden; /* Prevent body scroll, handle inside components */
+}
+
+/* --- Layout Grid --- */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* --- Sidebar (Gemini Style) --- */
+.sidebar {
+  width: 280px;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  transition: width 0.3s ease;
+}
+
+/* Mobile responsive sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Hidden on mobile for simplicity */
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 24px; /* Pill shape */
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.menu-item.active {
+  background-color: rgba(110, 180, 135, 0.2); /* Tint of your accent */
+  color: #8edba9;
+}
+
+.new-chat-btn {
+  background-color: #1a1a1c;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.new-chat-btn:hover {
+  background-color: #2b2c2d;
+  color: var(--text-main);
+}
+
+/* --- Main Content Area --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--bg-body);
+}
+
+/* --- Top Bar --- */
+.top-bar {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.model-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.model-selector:hover {
+  color: var(--text-main);
+}
+
+/* --- Welcome / Empty State --- */
+.welcome-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center horizontally */
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  text-align: left; /* Align text to left block */
+  width: 100%;
+  padding: 0 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.greet-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #444746; /* Dimmed text */
+  margin-bottom: 40px;
+  align-self: flex-start; /* Force align left within container */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.greet-text span {
+  display: block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.card {
-  padding: 2em;
+/* --- Chat Feed (Scrollable) --- */
+.chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0 100px 0; /* Bottom padding for input bar */
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #131314;
 }
 
-.read-the-docs {
-  color: #888;
+.message-row {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.message-content {
+  flex: 1;
+}
+
+.message-content h1, .message-content h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  margin-top: 1.5rem;
+  color: #fff;
+}
+
+.message-content p {
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+/* --- Bottom Input Area (The "Gemini" Bar) --- */
+.input-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 20px 30px 20px;
+  background: linear-gradient(to top, var(--bg-body) 80%, transparent); /* Fade out top */
+  display: flex;
+  justify-content: center;
+}
+
+.input-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--bg-sidebar);
+  border-radius: 32px; /* Distinct Gemini pill shape */
+  padding: 10px 10px 10px 24px; /* Right padding handles button */
+  display: flex;
+  align-items: flex-end; /* Align textarea bottom */
+  gap: 12px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.input-container:focus-within {
+  background-color: var(--bg-surface);
+  border-color: rgba(110, 180, 135, 0.3); /* Subtle accent border */
+}
+
+textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 14px 0;
+  resize: none;
+  max-height: 150px;
+  outline: none;
+}
+
+.submit-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.submit-btn.has-text {
+  background: var(--brand-gradient);
+  color: #fff;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Icons */
+.material-icons {
+  font-size: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loader */
+.gemini-loader {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #1b3544, #6e6e6e, #1b3544);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
