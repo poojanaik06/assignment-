@@ -603,3 +603,52 @@ textarea {
 }
 
 @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+/* --- ADD THESE NEW STYLES --- */
+
+/* 1. IMAGE GENERATION STYLING */
+/* This targets images inside the blog content (both preview and published) */
+.blog-content img,
+.blog-article img {
+  width: 100%;
+  height: auto;
+  max-height: 450px; /* Prevent overly tall images */
+  object-fit: cover; /* Ensure they fill the space nicely */
+  border-radius: 12px;
+  margin: 2.5rem 0; /* Spacing above and below images */
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3); /* Nice depth effect */
+  display: block;
+}
+
+/* 2. SCROLLBAR & CENTERING FOR PUBLISHED VIEW */
+
+/* Ensures the container takes full height and allows scrolling */
+.scrollable-container {
+  height: 100vh;
+  overflow-y: auto; /* Forces scrollbar if content is long */
+  scrollbar-width: thin; /* Firefox specific nicer scrollbar */
+  scrollbar-color: #444 var(--bg-body);
+}
+
+/* Defines the centered wrapper for the blog post */
+.centered-article-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px 100px 20px; /* Bottom padding for scrolling clearance */
+  width: 100%;
+}
+
+/* Ensure the article itself is centered and has a max-width */
+.blog-article {
+  width: 100%;
+  max-width: 800px; /* The reading width */
+  margin: 0 auto;   /* Horizontally center the block */
+  /* Note: We don't use 'text-align: center' here because reading 
+     long paragraphs of centered text is bad UX. The *container* is centered. */
+}
+
+/* --- Ensure existing styles don't conflict --- */
+/* Update .blog-page-container to remove previous centering collisions */
+.blog-page-container {
+  background-color: var(--bg-body);
+  /* Removed display:flex/align-items:center from here, handled by wrapper now */
+}
